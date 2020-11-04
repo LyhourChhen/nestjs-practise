@@ -25,6 +25,6 @@ export class UserService {
   }
 
   async createUser(user: CreateUserDto): Promise<void> {
-    await this.userRepository.create(user);
+    await this.userRepository.save(user);
   }
 }

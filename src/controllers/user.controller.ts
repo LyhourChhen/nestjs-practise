@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { User } from 'src/entities/user.entity';
 import { UserService } from 'src/services/user.service';
 import { CreateUserDto } from '../dto/user.dto';
 
-@Controller('users')
+@Controller('/users')
 export class UserController {
   constructor(private readonly userServices: UserService) {}
   @Get()
@@ -13,5 +13,10 @@ export class UserController {
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto): Promise<void> {
     return this.userServices.createUser(createUserDto);
+  }
+
+  @Get(['/:id'])
+  async getOneUser(@Param() id: string): Promise<User> {
+    return this.userServices.getOneUser(id);
   }
 }
