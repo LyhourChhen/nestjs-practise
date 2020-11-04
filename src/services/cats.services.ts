@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Cat } from 'src/interfaces/Cat.interface';
-
+import { Cat } from 'src/interfaces/cat.interface';
+import * as _ from 'lodash';
 @Injectable()
 export class CatsServices {
   private readonly cats: Cat[] = [{ age: 10, breed: 'haha', name: 'lyhour' }];
@@ -10,6 +10,13 @@ export class CatsServices {
   }
 
   findAll(): Cat[] {
+    return this.cats;
+  }
+
+  deleteOne(name: String): Cat[] {
+    _.remove(this.cats, n => {
+      return n.name === name;
+    });
     return this.cats;
   }
 }

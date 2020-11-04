@@ -1,8 +1,8 @@
 import 'reflect-metadata';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { CatsServices } from 'src/services/cats.services';
-import { Cat } from 'src/interfaces/Cat.interface';
-import { CreateCatDto } from 'src/dto/create-cat.dto';
+import { Cat } from 'src/interfaces/cat.interface';
+import { CreateCatDto, DeleteDto } from 'src/dto/create-cat.dto';
 
 @Controller('cats')
 export class CatsController {
@@ -10,6 +10,12 @@ export class CatsController {
   @Post()
   async create(@Body() createCatDto: CreateCatDto) {
     this.catsServices.create(createCatDto);
+  }
+
+  @Delete()
+  async delete(@Body() deleteDto: DeleteDto) {
+    console.log('log name', deleteDto.name);
+    this.catsServices.deleteOne(deleteDto.name);
   }
 
   @Get()

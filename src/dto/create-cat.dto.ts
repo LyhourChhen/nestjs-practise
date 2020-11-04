@@ -10,3 +10,8 @@ export class CreateCatDto {
   @IsString()
   readonly breed: string;
 }
+
+export class DeleteDto {
+  @IsString()
+  readonly name: String;
+}
