@@ -19,4 +19,13 @@ export class CatsServices {
     });
     return this.cats;
   }
+
+  updateCat(cat: Cat): Cat[] {
+    this.cats.map((data, index) => {
+      if (cat.name === data.name) {
+        return (this.cats[index] = cat);
+      }
+    });
+    return this.cats;
+  }
 }
