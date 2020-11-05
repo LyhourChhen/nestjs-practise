@@ -19,6 +19,6 @@ async function bootstrap() {
 }
 bootstrap()
   .then(() =>
-    console.log('Server is start on ' + chalk.green('http://localhost:3000/')),
+    console.log(`Api is start on ${chalk.red('http://localhost:3000/api')}`),
   )
   .catch(err => console.log('init err', chalk.red(err)));
