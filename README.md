@@ -1,11 +1,7 @@
 ## Experiments NestJS
 
-<<<<<<< HEAD
-### Todo
+### Cover in the series so far.
 
-=======
-### Cover in the series so far. 
->>>>>>> origin/master
 - [ ] CRUD with local-data.
 - [ ] CRUD with TypeORM (use ORM to minipulate DB)
 - [ ] Enable Swagger as API Docs Builder
