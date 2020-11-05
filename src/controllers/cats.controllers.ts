@@ -10,7 +10,7 @@ import {
   Redirect,
   Req,
 } from '@nestjs/common';
-import { CatsServices } from 'src/services/cats.services';
+import { CatsServices } from 'src/services/cats.service';
 import { Cat } from 'src/interfaces/cat.interface';
 import { CreateCatDto, DeleteDto } from 'src/dto/create-cat.dto';
 import { Request } from 'express';
@@ -54,7 +54,7 @@ export class CatsController {
     }
   }
 
-  // Stream / RXJS
+  // Stream / RXJS / PubSub
   @Get()
   findAllSteamRXJS(): Observable<any[]> {
     return of([]);
