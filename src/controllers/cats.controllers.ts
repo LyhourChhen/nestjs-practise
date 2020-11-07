@@ -4,6 +4,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Post,
   Put,
   Query,
@@ -15,6 +17,7 @@ import { Cat } from 'src/interfaces/cat.interface';
 import { CreateCatDto, DeleteDto } from 'src/dto/create-cat.dto';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
+import { CForbiddenException } from '../exception/forbidden.exception';
 
 @Controller('cats')
 export class CatsController {
@@ -58,6 +61,22 @@ export class CatsController {
   @Get()
   findAllSteamRXJS(): Observable<any[]> {
     return of([]);
+  }
+
+  @Get('exception')
+  getExceptionTest() {
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'This is a custom message',
+      },
+      HttpStatus.FORBIDDEN,
+    );
+  }
+
+  @Get('forbidden')
+  getForbiddenTest() {
+    throw new CForbiddenException();
   }
 
   @Put()

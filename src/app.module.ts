@@ -1,10 +1,18 @@
-import { Global, Module } from '@nestjs/common';
+import {
+  Global,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { CatsModule } from './modules/cats.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { Connection } from 'typeorm';
 import { User } from './entities/user.entity';
 import { UserModule } from './modules/user.module';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
+import cors from 'cors';
+import helmet from 'helmet';
+
 @Global()
 @Module({
   imports: [
@@ -22,6 +30,10 @@ import { UserModule } from './modules/user.module';
     UserModule,
   ],
 })
-export class AppModule {
-  constructor(private connection: Connection) {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(cors(), helmet(), LoggerMiddleware)
+      .forRoutes({ method: RequestMethod.GET, path: 'cats' });
+  }
 }
